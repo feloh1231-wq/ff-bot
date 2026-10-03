@@ -1,0 +1,30 @@
+import logging
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+
+# حط توكن البوت بتاعك هنا
+BOT_TOKEN = "PUT_YOUR_TOKEN_HERE"
+
+logging.basicConfig(level=logging.INFO)
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "✅ بوت فري فاير شغال!\n\n"
+        "الأوامر:\n"
+        "/start - تشغيل البوت\n"
+        "/id - جلب معلومات حساب"
+    )
+
+async def get_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.args:
+        await update.message.reply_text("ابعت الأمر كده: /id 12345678")
+        return
+    player_id = context.args[0]
+    await update.message.reply_text(f"🔍 جاري البحث عن الحساب: {player_id}\n(هنا هنضيف كود جلب معلومات فري فاير)")
+
+if __name__ == '__main__':
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("id", get_id))
+    print("البوت شغال...")
+    app.run_polling()
