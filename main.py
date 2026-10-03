@@ -1,7 +1,7 @@
 import telebot
 import random
 
-TOKEN = "حط التوكن الجديد هنا"
+TOKEN = "8755044392:AAE5bBApRMjAlZ64qePmAnTzGDt-7hAdoLc"
 bot = telebot.TeleBot(TOKEN)
 
 players = []
